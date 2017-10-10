@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import GalleryImage from '../GalleryImage';
+import GalleryRow from '../GalleryRow';
+import arrayToChunks from '../lib/arrayToChunks.js';
 
 class GalleryContainer extends Component {
   constructor(props) {
@@ -29,10 +30,13 @@ class GalleryContainer extends Component {
   }
 
   render() {
-    const imgs = this.state.imgSrcs.map(imgSrc => <GalleryImage key={imgSrc} src={imgSrc} />);
     return (
       <div>
-        {imgs}
+        {
+          arrayToChunks(this.state.imgSrcs, 3).map((rowImgSrcs, index) => {
+            return <GalleryRow key={index} imgSrcs={rowImgSrcs} />;
+          })
+        }
       </div>
     );
   }
