@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 class GalleryImage extends Component {
   render() {
     const style = {
-      width: '33.33%',
+      margin: 1,
+      width: '33%',
     };
 
     return (
