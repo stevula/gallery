@@ -3,9 +3,19 @@ import React, { Component } from 'react';
 class RowSizeControls extends Component {
   render() {
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
         <label>Images per row</label>
-        <input type="number" min="0" max="20" value={this.props.value} onChange={this.props.onChange} />
+        <input
+          style={{
+            display: 'block',
+            margin: '0 auto',
+          }}
+          type="range"
+          min="1"
+          max="10"
+          value={this.props.value}
+          onChange={this.props.onChange} />
+        <span>{this.props.value}</span>
       </div>
     );
   }
