@@ -4,22 +4,31 @@ import GalleryImage from '../GalleryImage';
 
 class GalleryRow extends Component {
   render() {
-    const imgs = this.props.imgSrcs.map(imgSrc => <GalleryImage key={imgSrc} src={imgSrc} />);
-
-    const style = {
-      height: this.props.height,
-    };
-
     return (
-      <div style={style}>
-        {imgs}
+      <div>
+        {this.getScaledImageProperties().map(image => <GalleryImage key={image.src} {...image} /> )}
       </div>
     );
+  }
+
+  getScaledImageProperties(images = this.props.images, heightLimit = 100) {
+    const downsized = this.downsizeImages(images, heightLimit);
+    return downsized;
+  }
+
+  downsizeImages(images, height) {
+    return images.map((image) => {
+      return {
+        ...image,
+        height: `${height}`,
+        width: `${height / image.height * image.width - 1}`,
+      };
+    });
   }
 }
 
 GalleryRow.propTypes = {
-  imgSrcs: PropTypes.array.isRequired,
-}
+  images: PropTypes.array.isRequired,
+};
 
 export default GalleryRow;

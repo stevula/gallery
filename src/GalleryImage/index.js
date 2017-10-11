@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 class GalleryImage extends Component {
   render() {
     const style = {
-      margin: 1,
-      width: '33%',
+      margin: 0,
     };
 
     return (
-      <img style={style} src={this.props.src} alt="" />
+      <img style={style} {...this.props} alt="" />
     );
   }
 }
 
 GalleryImage.propTypes = {
   src: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
 }
 
 export default GalleryImage;
