@@ -4,7 +4,7 @@ class RowSizeControls extends Component {
   render() {
     return (
       <div style={{textAlign: 'center'}}>
-        <label>Images per row</label>
+        <label>{this.props.value} images per row</label>
         <input
           style={{
             display: 'block',
@@ -15,7 +15,6 @@ class RowSizeControls extends Component {
           max="10"
           value={this.props.value}
           onChange={this.props.onChange} />
-        <span>{this.props.value}</span>
       </div>
     );
   }
