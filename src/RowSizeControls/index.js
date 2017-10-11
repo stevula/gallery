@@ -6,10 +6,7 @@ class RowSizeControls extends Component {
       <div style={{textAlign: 'center'}}>
         <label>{this.props.value} images per row</label>
         <input
-          style={{
-            display: 'block',
-            margin: '0 auto',
-          }}
+          style={{display: 'block', margin: '0 auto'}}
           type="range"
           min="1"
           max="10"

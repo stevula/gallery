@@ -10,21 +10,35 @@ class GalleryContainer extends Component {
     this.state = {
       images: dummyData.images,
       rowSize: 4,
+      width: 1140, /* container max-width - container padding */
     };
   }
 
   render() {
     return (
-      <div>
+      <div ref={element => { this.element = element }}>
         <RowSizeControls value={this.state.rowSize} onChange={this.updateRowSize.bind(this)} />
         {this.getImageRows()}
       </div>
     );
   }
 
+  componentDidMount() {
+    this.updateWidth();
+    window.addEventListener('resize', this.updateWidth.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth.bind(this));
+  }
+
+  updateWidth() {
+    this.setState({ width: this.element.clientWidth });
+  }
+
   getImageRows() {
     return arrayToChunks(this.state.images, this.state.rowSize).map((images, index) => {
-      return <GalleryRow key={index} images={images} />;
+      return <GalleryRow key={index} images={images} maxWidth={this.state.width - 40} />;
     })
   }
 

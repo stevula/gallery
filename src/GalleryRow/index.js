@@ -5,14 +5,14 @@ import GalleryImage from '../GalleryImage';
 class GalleryRow extends Component {
   render() {
     return (
-      <div>
+      <div style={{textAlign: 'center'}}>
         {this.getScaledImageProperties().map(image => <GalleryImage key={image.src} {...image} /> )}
       </div>
     );
   }
 
   getScaledImageProperties(images = this.props.images) {
-    const targetRowWidth = 1140; // container width - container padding
+    const targetRowWidth = parseInt(this.props.maxWidth, 10);
     const tempImgHeight = 100;
     const tempImages = this.downsizeImages(images, tempImgHeight);
     const tempImagesCombinedWidth = tempImages.reduce((sum, img) => sum + img.width, 0);
