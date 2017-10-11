@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GalleryRow from '../GalleryRow';
 import RowSizeControls from '../RowSizeControls';
+import AddImageInput from '../AddImageInput';
 import arrayToChunks from '../lib/arrayToChunks';
 import dummyData from '../data/dummyData';
 
@@ -18,6 +19,7 @@ class GalleryContainer extends Component {
     return (
       <div ref={element => { this.element = element }}>
         <RowSizeControls value={this.state.rowSize} onChange={this.updateRowSize.bind(this)} />
+        <AddImageInput onChange={this.addImage.bind(this)} />
         {this.getImageRows()}
       </div>
     );
@@ -44,6 +46,21 @@ class GalleryContainer extends Component {
 
   updateRowSize(e) {
     this.setState({ rowSize: e.target.value });
+  }
+
+  addImage(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const newImage = { src: ev.target.result, height: 1000, width: 1000 };
+      this.setState({
+        images: [newImage, ...this.state.images.slice(0)],
+      });
+    };
+
+    reader.readAsDataURL(file);
   }
 }
 
