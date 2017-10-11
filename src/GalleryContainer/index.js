@@ -8,6 +8,7 @@ class GalleryContainer extends Component {
     super(props);
     this.state = {
       images: dummyData.images,
+      rowSize: 4,
     };
   }
 
@@ -15,7 +16,7 @@ class GalleryContainer extends Component {
     return (
       <div>
         {
-          arrayToChunks(this.state.images, 3).map((images, index) => {
+          arrayToChunks(this.state.images, this.state.rowSize).map((images, index) => {
             return <GalleryRow key={index} images={images} />;
           })
         }
