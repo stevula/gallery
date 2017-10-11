@@ -6,7 +6,7 @@ class GalleryImage extends Component {
     const style = {
       margin: 0,
     };
-
+    
     return (
       <img style={style} {...this.props} alt="" />
     );
@@ -15,8 +15,8 @@ class GalleryImage extends Component {
 
 GalleryImage.propTypes = {
   src: PropTypes.string.isRequired,
-  height: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 }
 
 export default GalleryImage;

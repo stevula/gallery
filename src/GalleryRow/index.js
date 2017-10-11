@@ -11,17 +11,21 @@ class GalleryRow extends Component {
     );
   }
 
-  getScaledImageProperties(images = this.props.images, heightLimit = 100) {
-    const downsized = this.downsizeImages(images, heightLimit);
-    return downsized;
+  getScaledImageProperties(images = this.props.images) {
+    const targetRowWidth = 1000;
+    const tempImgHeight = 100;
+    const tempImages = this.downsizeImages(images, tempImgHeight);
+    const tempImagesCombinedWidth = tempImages.reduce((sum, img) => sum + img.width, 0);
+    const adjustmentFactor = targetRowWidth / tempImagesCombinedWidth;
+    return this.downsizeImages(images, tempImgHeight * adjustmentFactor)
   }
 
   downsizeImages(images, height) {
     return images.map((image) => {
       return {
         ...image,
-        height: `${height}`,
-        width: `${height / image.height * image.width - 1}`,
+        height,
+        width: image.width * height / image.height,
       };
     });
   }
