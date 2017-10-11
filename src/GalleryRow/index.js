@@ -12,7 +12,7 @@ class GalleryRow extends Component {
   }
 
   getScaledImageProperties(images = this.props.images) {
-    const targetRowWidth = 1000;
+    const targetRowWidth = 1140; // container width - container padding
     const tempImgHeight = 100;
     const tempImages = this.downsizeImages(images, tempImgHeight);
     const tempImagesCombinedWidth = tempImages.reduce((sum, img) => sum + img.width, 0);
